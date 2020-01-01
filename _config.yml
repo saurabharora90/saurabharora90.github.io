@@ -14,10 +14,11 @@ author: Some Person
 # --- List of links in the navigation bar --- #
 
 navbar-links:
-  Who Am I: "aboutme"
+  Index: "tags"
   #Resources:
   #  - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
   #  - Learn markdown: "http://www.markdowntutorial.com/"
+  Who Am I: "aboutme"
   Home: "https://saurabharora.dev"
 
 # Image to show in the navigation bar - image must be a square (width = height)
