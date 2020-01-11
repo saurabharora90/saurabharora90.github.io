@@ -3,6 +3,7 @@ layout: post
 published: true
 title: Proguard/R8 in the world of modularity
 date: '2020-01-10'
+tags: [android, modular]
 ---
 The benefits of modularing our apps have been echoed a lot in the community and by Google itself. Here I would like to discuss how we should look into handling Proguard/R8 rules files in this new world.
 
