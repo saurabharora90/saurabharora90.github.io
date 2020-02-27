@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Cleaner pull requests for Kotlin & JAVA code
-subtitle: Code styling and formating using Checkstyle and ktlint
+subtitle: Code styling and formatting using Checkstyle and ktlint
 published: true
 date: '2020-02-26'
-tags: [android, code formating]
+tags: [android, code formatting]
 ---
 Recently I looked into reducing the noise from our pull requests. The bulk of the effort involved setting up a code styling guide, formatting all our code based on the style guide and setting up automated checks to capture formatting errors. Having a properly formatted code ensures pull requests don't have noise in the form of whitespaces, function ordering, braces, etc and rather focuses on the enhancements.
 
@@ -14,7 +14,7 @@ Through this post, I would like to detail some of my learnings and how other dev
 
 Our entire team wasn't picky about what code style we chose. The only consideration we had was it should require minimal setup effort and should be easy for a new developer to adopt. Since our codebase is a mixture of JAVA and Kotlin code, we needed guides and tools for both.
 
-### Code Style and Formating JAVA Code
+### Code Style and Formatting JAVA Code
 
 For JAVA, the process was really straight forward. We decided to stick with the IDE defaults without adding any customization to it.
 
@@ -36,11 +36,11 @@ Once the IDE is done formatting, you can run Checkstyle on your codebase to veri
 
 *Note:* Checkstyle does not auto-format the code to resolve formatting issues. It will just highlight the issues in the codebase.
 
-### Code Style and Formating Kotlin Code
+### Code Style and Formatting Kotlin Code
 
 When it came to Kotlin, I realized that there are two popular Kotlin Style guides, one by [Jetbrains](https://kotlinlang.org/docs/reference/coding-conventions.html) and another on the [Android developer site](https://developer.android.com/kotlin/style-guide). Turns out, Android Studio by default uses the Kotlin Coding conventions (I was a bit surprised that it wasn't based off the Android Developer guide but then Android Studio is based off IntelliJ, who also maintain the Kotlin Plugin, so it probably makes sense that the default is Jetbrains Style?). 
 
-To help in catching any formating errors, we decided to use [ktlint](https://github.com/pinterest/ktlint).
+To help in catching any formatting errors, we decided to use [ktlint](https://github.com/pinterest/ktlint).
 
 >An anti-bikeshedding Kotlin linter with built-in formatter 
 
@@ -94,8 +94,8 @@ That's it! If you have any questions or suggestions, leave a comment below or hi
 ##### Random musings:
 
 - The developer community is really passionate about whether we should use tabs or spaces. All the discussions made for a fascinating read.
-- Apparently using spaces can make you richer - https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs/
-- A Google-er analyzed 40,000 repositories and concluded the winner is: https://www.reddit.com/r/programming/comments/50f5r9/400000_github_repositories_1_billion_files_14/ 
-- Set up a macro to auto-format your code file once you are done with it. This will help reduce the errors that are flagged by Checkstyle and ktlint. See here for how to set up a macro: https://twitter.com/saurabh_arora90/status/1075305267003158528
+- Apparently using spaces can make you [richer](https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs/)
+- A Google-er analyzed 40,000 repositories for tabs vs spaces and concluded the [winner](https://www.reddit.com/r/programming/comments/50f5r9/400000_github_repositories_1_billion_files_14/)
+- Set up a macro to auto-format your code file once you are done with it. This will help reduce the errors that are flagged by Checkstyle and ktlint. See [here](https://twitter.com/saurabh_arora90/status/1075305267003158528) for how to set up a macro
 - I have only highlighted the import ordering difference b/w Kotlin Coding Conventions and Android Kotlin Style Guide. There are other differences as well, which warrant a `--android` switch for ktlint.
-- Github issue documenting ktlint's Alphabetical import ordering being a compatibility issue with Android Studio: https://github.com/pinterest/ktlint/issues/527
+- [Github issue](https://github.com/pinterest/ktlint/issues/527) documenting ktlint's Alphabetical import ordering being a compatibility issue with Android Studio
