@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Cleaner pull requests for Kotlin & JAVA code
+title: Cleaner pull requests for Kotlin & Java code
 subtitle: Code styling and formatting using Checkstyle and ktlint
 published: true
 date: '2020-02-26'
@@ -12,11 +12,11 @@ Through this post, I would like to detail some of my learnings and how other dev
 
 ### Choosing a Code Style
 
-Our entire team wasn't picky about what code style we chose. The only consideration we had was it should require minimal setup effort and should be easy for a new developer to adopt. Since our codebase is a mixture of JAVA and Kotlin code, we needed guides and tools for both.
+Our entire team wasn't picky about what code style we chose. The only consideration we had was it should require minimal setup effort and should be easy for a new developer to adopt. Since our codebase is a mixture of Java and Kotlin code, we needed guides and tools for both.
 
-### Code Style and Formatting JAVA Code
+### Code Style and Formatting Java Code
 
-For JAVA, the process was really straight forward. We decided to stick with the IDE defaults without adding any customization to it.
+For Java, the process was really straight forward. We decided to stick with the IDE defaults without adding any customization to it.
 
 We used [Checkstyle](https://checkstyle.sourceforge.io/) to help capture any formatting errors.
 
@@ -24,11 +24,11 @@ We used [Checkstyle](https://checkstyle.sourceforge.io/) to help capture any for
 
 It needs a configuration file that defines the formatting "rules". We [created](https://gist.github.com/saurabharora90/039ba64aecef47148ec19e0d98722c17) one which closely matches the formatting style of the IDE. This was heavily borrowed from the [Google Checks](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml) configuration file.
 
-To validate the setup, we first formatted our entire codebase by using the IDE defaults. Make sure you are using the IDE Defaults for JAVA and not a modified version. The default can be reset via the IDE settings/preferences under Editor->Code Style->Java->Set from Predefined style -> Android). 
+To validate the setup, we first formatted our entire codebase by using the IDE defaults. Make sure you are using the IDE Defaults for Java and not a modified version. The default can be reset via the IDE settings/preferences under Editor->Code Style->Java->Set from Predefined style -> Android). 
 
-To format your entire codebase, open your project in Android Studio, right-click on the root folder and select "Reformat Code". Make sure the File mask is set to JAVA files.
+To format your entire codebase, open your project in Android Studio, right-click on the root folder and select "Reformat Code". Make sure the File mask is set to Java files.
 
-![Format-JAVA](../img/reformat_java.png)
+![Format-Java](../img/reformat_java.png)
 
 Once the IDE is done formatting, you can run Checkstyle on your codebase to verify if there are any unresolved issues. If this is the first time that you are formatting your codebase (as was the case for us), you might have some leftover issues which the IDE couldn't auto-format. You can try to fix them one by one or leave these to be addressed when future changes are made to these files. We did leave a few files like that since they had a lot of formatting errors.
 
@@ -67,7 +67,7 @@ In our .editorconfig file (at the root level of your project), we added:
 
 The Kotlin Coding Conventions doesn't mention anything about imports; the IDE does not support import ordering, so our editor config files instructed ktlint to disable those rules.
 
-We finally had a zero-overhead setup for ktlint. Use the default IDE setting, clone the repo and you are on your way.
+We finally had a zero-overhead setup for ktlint for our project. No need to modify the IDE settings, just clone the project repo and you are on your way.
 
 To validate the setup, we first formatted our entire codebase by using the IDE defaults. To format your entire codebase, open your project in Android Studio, right-click on the root folder and select "Reformat Code". This time make sure the File mask is set to Kotlin files. Once the IDE is done formatting, you can run ktlint on your codebase to verify if there are any unresolved issues (hopefully there should be none or a few that the IDE couldn't auto format).
 
@@ -77,7 +77,7 @@ To validate the setup, we first formatted our entire codebase by using the IDE d
 
 ### Automate Checking
 
-We explored two options for automating these checks for developers. We could either (1) use ktlint and Checkstyle Gradle Plugins add this to our CI or (2) use git hooks. We eventually decided to use git hooks because we felt this provided a faster turnaround and made sure that PR's coming in were already formatted, rather than relying on our CI to let us know if it wasn't.
+We explored two options for automating these checks for developers. We could either (1) use ktlint and Checkstyle Gradle Plugins add this to our CI or (2) use git hooks. We eventually decided to use git hooks because we felt this provided a faster turnaround and made sure that PRs coming in were already formatted, rather than relying on our CI to let us know if it wasn't.
 
 We added pre-commit hooks for both checkstyle and ktlint, which would check the files being committed and run checks on them. Staying with our mantra of least configuration, the git hooks are checked into VCS into a `.githooks` folder. By default, githooks get added to `.git/hooks` folder but the `.git` folder is not checked into VCS. Hence we decided to change the [defaults](https://git-scm.com/docs/githooks). Once someone clones the repository, they need to run:
 
@@ -95,7 +95,7 @@ That's it! If you have any questions or suggestions, leave a comment below or hi
 
 - The developer community is really passionate about whether we should use tabs or spaces. All the discussions made for a fascinating read.
 - Apparently using spaces can make you [richer](https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs/)
-- A Google-er analyzed 40,000 repositories for tabs vs spaces and concluded the [winner](https://www.reddit.com/r/programming/comments/50f5r9/400000_github_repositories_1_billion_files_14/)
+- A Googler analyzed 40,000 repositories for tabs vs spaces and concluded the [winner](https://www.reddit.com/r/programming/comments/50f5r9/400000_github_repositories_1_billion_files_14/)
 - Set up a macro to auto-format your code file once you are done with it. This will help reduce the errors that are flagged by Checkstyle and ktlint. See [here](https://twitter.com/saurabh_arora90/status/1075305267003158528) for how to set up a macro
-- I have only highlighted the import ordering difference b/w Kotlin Coding Conventions and Android Kotlin Style Guide. There are other differences as well, which warrant a `--android` switch for ktlint.
+- I have only highlighted the import ordering difference between Kotlin Coding Conventions and Android Kotlin Style Guide. There are other differences as well, which warrant a `--android` switch for ktlint.
 - [Github issue](https://github.com/pinterest/ktlint/issues/527) documenting ktlint's Alphabetical import ordering being a compatibility issue with Android Studio
