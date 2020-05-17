@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AsyncAndroid Video - Finding Needles in a Haystack
+title: AsyncAndroid Video - Finding Attributes in a Haystack
 subtitle: Navigate & decipher the values.xml file to figure out which theme attributes control the appearance of widgets. 
 published: true
 date: '2020-05-8'
