@@ -31,7 +31,7 @@ Now that we have a primer on how to find `compat` equivalents, let's take a look
 
 From the above table, we can see that there is no real difference between the `ContextCompat` methods vs the ones in `ResourceCompat`. You would use `ContextCompat` methods if you had access to `Context` but if you only had access to the `Resource` object, then you would use the ones inside `ResourceCompat`. At the end of the day, the result from both of them will be the same.
 
-At this juncture, it is important to remember that platform framework support for Vector Drawables and tinting was added in API level 21. As the `ContextCompat` and `ResourcesCompat` methods simply delegate to platform framework, these methods **will not **be able to load Vector Drawables on older platforms as the older platforms don’t have support for them.
+At this juncture, it is important to remember that platform framework support for Vector Drawables and tinting was added in API level 21. As the `ContextCompat` and `ResourcesCompat` methods simply delegate to platform framework, these methods **will not** be able to load Vector Drawables on older platforms as the older platforms don’t have support for them.
 
 
 ## Enter AppCompat
@@ -118,10 +118,12 @@ Now the examples that were detailed above mostly save developers from having to 
 
 As of AppCompat 1.2, the lint check recommends using `ContextCompat`. This is a [known bug](https://issuetracker.google.com/issues/165927862) and will be resolved soon. Future versions of AppCompat will instead recommend using `AppCompatResources` to load drawables and Color State Lists.
 
+&nbsp;
 *   Should we use `AppCompatResource` if we only support API Level 21 and above?
 
 Yes, we should. `VectorDrawableCompat` is an unbundled implementation of Vector Drawables outside of the framework and can be updated without needing platform framework updates. This allows developers to work around any bugs that are there in the framework implementations of Vector Drawables (which it did have).
 
+&nbsp;
 *   `ViewCompat` has a `setBackgroundTintList` method which applies tints to views even on pre API Level 21 devices. How does that work?
 
 The ability to tint backgrounds and images was added in API Level 21. As explained earlier in the post, the ViewCompat class does not backport this functionality to older API platforms. That is still the job of `AppCompat`. `ViewCompat` uses a nifty trick where on the older platform (pre-API level 21), [it checks if the view implements `TintableBackgroundView`](https://github.com/androidx/androidx/blob/androidx-master-dev/core/core/src/main/java/androidx/core/view/ViewCompat.java#L2787). If it does, then the `ViewCompat` delegates to it to perform the tinting. Most of the [widgets](https://github.com/androidx/androidx/blob/androidx-master-dev/appcompat/appcompat/src/main/java/androidx/appcompat/widget/AppCompatButton.java#L59) in `AppCompat` implements the `TintableBackgroundView` interface and offer tinting functionality, effectively backporting it to older platforms.
@@ -130,12 +132,14 @@ Since we use the AppCompat theme (or MDC theme) in our apps, we end up using the
 
 **Note:** The same mechanism applies for `ImageCompat`
 
+&nbsp;
 *   What about `app:srcCompat`, `app:drawableLeftCompat`, `app:tint`, etc.?
 
 Drawables passed through the above XML attributes are inflated by `AppCompatResource`. Tint passed through the above XML attributes are also applied by the app compat widgets.
 
 **Note:** Just like the framework had bugs with Vector Drawables, the framework, unfortunately, had bugs with tinting as well. Hence it is always recommended to use `app:srcCompat`, `app:tint`, etc. even when we are only targeting API Level 21 and above.
 
+&nbsp;
 *   What is the future with Jetpack Compose?
 
 Jetpack Compose is a full-fledged replacement for the UI toolkit. Once it’s stable, I believe we would no longer need the AppCompat Widgets, AppCompatResources, ContextCompat and ResourcesCompat. Till then (and even in the future when maintaining existing apps), it would serve us well to know when to use which method and how things work under the hood.
