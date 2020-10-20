@@ -26,7 +26,7 @@ The name of the `compat` class is usually the same as the class in which the ori
 Now that we have a primer on how to find `compat` equivalents, let's take a look at the methods inside `ContextCompat` and `ResourcesCompat`. For this post, we’ll only look at the methods which have the same name in both classes.
 
 
-<script src="https://gist.github.com/saurabharora90/32c01965b4f959cfc7e45c29837ad374.js"></script>
+![ContextCompat-vs-ResourcesCompat](../assets/img/contextcompatVSresourcescompat.png)
 
 
 From the above table, we can see that there is no real difference between the `ContextCompat` methods vs the ones in `ResourceCompat`. You would use `ContextCompat` methods if you had access to `Context` but if you only had access to the `Resource` object, then you would use the ones inside `ResourceCompat`. At the end of the day, the result from both of them will be the same.
