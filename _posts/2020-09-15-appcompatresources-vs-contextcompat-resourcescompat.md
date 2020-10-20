@@ -15,10 +15,10 @@ The AndroidX/Jetpack libraries provide a bunch of `compat` classes to help devel
 A general rule of thumb that has served me extremely well over the last few years is to look for a `Compat` class whenever I encounter a deprecated API method or try to use a method that is only available in the recent versions of the platform framework API. 
 
 
-![Min-API](../img/min_api.png)
+![Min-API](../assets/img/min_api.png)
 
 
-![Deprecated](../img/deprecated.png)
+![Deprecated](../assets/img/deprecated.png)
 
 
 The name of the `compat` class is usually the same as the class in which the original API method exists. For the above example, `setTextAppearance` is a part of the `TextView` class. Therefore, the equivalent `compat` class which **might** (because not all such methods have a `compat` equivalent) have this method is the [TextViewCompat](https://developer.android.com/reference/androidx/core/widget/TextViewCompat#setTextAppearance(android.widget.TextView,%20int)) class. Note that it is important to look at the class which contains the API method and not mistake it for the class on which we are operating. For example, the `setBackgroundDrawable` method is deprecated and we could be using it to set a background on a `Button`, but the method actually belongs to the [View](https://developer.android.com/reference/android/view/View#setBackgroundDrawable(android.graphics.drawable.Drawable)) class and hence it’s equivalent would be found in the [ViewCompat](https://developer.android.com/reference/androidx/core/view/ViewCompat#setBackground(android.view.View,%20android.graphics.drawable.Drawable))` class.
@@ -26,98 +26,7 @@ The name of the `compat` class is usually the same as the class in which the ori
 Now that we have a primer on how to find `compat` equivalents, let's take a look at the methods inside `ContextCompat` and `ResourcesCompat`. For this post, we’ll only look at the methods which have the same name in both classes.
 
 
-<table>
-  <tr>
-   <td><strong>ContextCompat</strong>
-   </td>
-   <td><strong>ResourcesCompat</strong>
-   </td>
-  </tr>
-  <tr>
-   <td markdown="span">
-
-`getDrawable(Context context, int id)`   
-
-</br>
-
-<code>
- if (SDK_IsdsNT >= 21) {
- 	return context.getDrawable(id);
- } else {
-    return context.getResources().getDrawable(id);
- }
-</code>
-   </td>
-   
-   <td>
-   
-   `getDrawable(Resources res, int id, Theme theme)`
-
-</br>
-
-```
-if (SDK_INT >= 21) {
-	return res.getDrawable(id, theme);
-} else {
-	return res.getDrawable(id);
-}
-```
-   </td>
-  </tr>
-  <tr>
-   <td>
-   
-   `getColor(Context context, int id)`
-   
-```
-if (SDK_INT >= 23) {
-	return context.getColor(id);
-} else {
-	return context.getResources().getColor(id);
-}
-```
-   </td>
-   <td>
-   
-   `getColor(Resources res, int id, Theme theme)`
-
-```
-
-if (SDK_INT >= 23) {
-	return res.getColor(id, theme);
-} else {
-	return res.getColor(id);
-}
-```
-   </td>
-  </tr>
-  <tr>
-   <td>
-   
-   `getColorStateList(Context context, int id)`
-
-```
-if (SDK_INT >= 23) {
-	return context.getColorStateList(id);
-} else {
-	return context.getResources().getColorStateList(id);
-}
-```
-   </td>
-   <td>
-   
-   `getColorStateList(Resources res, int id, Theme theme)`
-
-```
-if (SDK_INT >= 23) {
-	return res.getColorStateList(id, theme);
-} else {
-	return res.getColorStateList(id);
-}
-```
-   </td>
-  </tr>
-</table>
+<script src="https://gist.github.com/saurabharora90/32c01965b4f959cfc7e45c29837ad374.js"></script>
 
 
 From the above table, we can see that there is no real difference between the `ContextCompat` methods vs the ones in `ResourceCompat`. You would use `ContextCompat` methods if you had access to `Context` but if you only had access to the `Resource` object, then you would use the ones inside `ResourceCompat`. At the end of the day, the result from both of them will be the same.
@@ -201,6 +110,7 @@ Now the examples that were detailed above mostly save developers from having to 
   </tr>
 </table>
 
+&nbsp;
 
 ## FAQ’s
 
