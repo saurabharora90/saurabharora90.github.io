@@ -3,6 +3,7 @@ layout: post
 published: true
 title: AppCompat 1.2 Lint Checks - AppCompatResources or ContextCompat or ResourcesCompat
 date: '2020-10-20'
+share-img: "assets/img/jetpack-hero.svg"
 tags: [android, appcompat, androidx, jetpack]
 ---
 [AppCompat 1.2](https://developer.android.com/jetpack/androidx/releases/appcompat#1.2.0-beta01) release came with a couple of new lint rules which suggest using either `AppCompatResources` or `ContextCompat` or `ResourcesCompat` depending on the API you were originally consuming. But what is the difference between the common methods in these three classes? 
