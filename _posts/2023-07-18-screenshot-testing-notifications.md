@@ -8,7 +8,7 @@ tags: [android, testing, screenshot]
 
 At Twitter, we regularly use [Paparazzi](https://github.com/cashapp/paparazzi) for our screenshot unit tests. We prefer this library over others because it runs on the JVM, which results in fast turnaround times.
 
-Recently, I was working on changes to our push notification layout. As I was making modifications, I began to wonder if it would be possible to have screenshot tests for the same. This would help ensure that our notification layout was displaying properly and consistently across different devices and OS versions.
+Recently, I was working on changes to our push notification layout. As I was making modifications, I began to wonder if it would be possible to have JVM screenshot tests for the same. This would help ensure that our notification layout was displaying properly and consistently across different devices and OS versions.
 
 ## Custom Notification Layout
 
@@ -236,4 +236,4 @@ In conclusion, testing notifications can be challenging, especially when working
 
 ------------------------------------------------------------------------------------------------------------------------
 
-<sup>Thanks to [Chris Banes](https://twitter.com/chrisbanes) for the review</sup>
+<sup>Thanks to [Chris Banes](https://twitter.com/chrisbanes) for the review and [Mike Nakhimovich](https://androiddev.social/@friendlymike) for the idea.</sup>
