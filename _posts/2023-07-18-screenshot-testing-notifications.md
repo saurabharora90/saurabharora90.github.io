@@ -4,6 +4,7 @@ published: true
 title: Screenshot Testing Push Notifications
 date: '2023-07-18'
 tags: [android, testing, screenshot]
+categories: Testing
 ---
 
 At Twitter, we regularly use [Paparazzi](https://github.com/cashapp/paparazzi) for our screenshot unit tests. We prefer this library over others because it runs on the JVM, which results in fast turnaround times.
