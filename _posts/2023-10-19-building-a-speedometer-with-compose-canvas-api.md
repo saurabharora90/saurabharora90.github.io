@@ -5,13 +5,14 @@ title: Building a Speedometer with Compose Canvas API
 date: '2023-10-19'
 categories: Compose
 tags: [android, compose]
+image:
+  path: /assets/img/banner.png
+  alt: Speedometer we'll be building
 ---
 
 The other day, while sitting in the back of a taxi, I noticed the speedometer and had the idea to build one using Jetpack Compose (because, why not? 😛). In this post, I will explain the process of building the speedometer and discuss the challenges I faced. This post assumes a basic knowledge of the Canvas API in Jetpack Compose. 
 
-The speedometer we are building will look like this:
-
-![Screenshot_20231009_004654.png](/assets/img/Screenshot_20231009_004654.png){: w="400" h="400" }
+The speedometer we are building will look like the one above.
 
 ## The Canvas and Drawing the Arc
 
