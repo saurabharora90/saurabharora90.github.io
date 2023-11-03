@@ -241,7 +241,7 @@ That’s it. We now have our speedometer.
 > We can also accept the speed value as a user input to animate the indicator and bring our speedometer to life:
 {: .prompt-tip }
 
-{% include embed/youtube.html id='XRAserv19pE' %}
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Weekend project: Building a speedometer in Jetpack Compose. Aligning the text was the biggest challenge. Blog soon!<a href="https://twitter.com/hashtag/AndroidDev?src=hash&amp;ref_src=twsrc%5Etfw">#AndroidDev</a> <a href="https://twitter.com/hashtag/JetpackCompose?src=hash&amp;ref_src=twsrc%5Etfw">#JetpackCompose</a> <a href="https://t.co/Gx80RbklLX">pic.twitter.com/Gx80RbklLX</a></p>&mdash; Saurabh Arora (@iSaurabhArora) <a href="https://twitter.com/iSaurabhArora/status/1683161546896310273?ref_src=twsrc%5Etfw">July 23, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 The full code for this (along with animation and seekbar for demo) can be found at: 
 
