@@ -10,9 +10,9 @@ image:
   alt: AI Workflow Sync
 ---
 
-The other day, I found myself in a bit of a "digital groundhog day" loop. I was explaining my preference for avoiding mock tests to **Android Studio Agent Mode**, then repeating the same thing to the **Gemini CLI**, and finally watching a **GitHub bot** suggest a mock-heavy test that I'd specifically ruled out in my local config. 
+The other day, I found myself in a bit of a loop. I was explaining my preference for avoiding mock tests to Android Studio Agent Mode, then repeating the same thing to the Gemini CLI, and finally watching a GitHub bot suggest a mock-heavy test that I'd specifically ruled out in my local config. 
 
-As Android developers, we're increasingly leaning on AI agents (whether it's the integrated **Android Studio Agent Mode**, command-line tools, or CI-based review bots). But here's the catch: **context is fragmented**. Your IDE might have access to your project files, but it doesn't know about your user-level preferences that span across all your repositories. Your CLI tools might see your global config, but your **GitHub bot** only knows what's been committed to the repo.
+As Android developers, we're increasingly leaning on AI agents (whether it's the integrated Android Studio Agent Mode, command-line tools, or CI-based review bots). But here's the catch: **context is fragmented**. Your IDE might have access to your project files, but it doesn't know about your user-level preferences that span across all your repositories. Your CLI tools might see your global config, but your GitHub bot only knows what's been committed to the repo.
 
 I needed a "single source of truth" for my coding principles.
 
@@ -73,9 +73,9 @@ This setup is particularly effective for solo projects and personal repositories
 
 ## The Result: Seamless AI Assistance
 
-My workflow is now truly unified. When I open a PR, the **GitHub bot** sees the guidelines in the repo and knows exactly how I want my tests written. When I'm in the IDE using **Android Studio Agent Mode**, it picks up the same context. 
+My workflow is now truly unified. When I open a PR, the GitHub bot sees the guidelines in the repo and knows exactly how I want my tests written. When I'm in the IDE using Android Studio Agent Mode, it picks up the same context. 
 
 I no longer have to repeat myself or deal with conflicting suggestions. It is just one consistent set of rules that follows me wherever I go.
 
-Happy composing!
+Happy agent engineering!
 
