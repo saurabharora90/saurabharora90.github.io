@@ -107,7 +107,7 @@ fun FullscreenViewer(post: Post) {
 }
 ```
 
-With this in place, tapping a tile navigates to the viewer with a smooth shared element transition. The image morphs from its tile size to fullscreen. Pressing a close button (which calls `navigator.goBack()`) reverses the animation beautifully.
+With this in place, tapping a tile navigates to the viewer with a smooth shared element transition. The image morphs from its tile size to fullscreen. Pressing a close button (which calls `navigator.goBack()`) reverses the animation.
 
 ![close_press.gif](/assets/img/close_press.gif){: w="320" h="4" }
 
@@ -115,19 +115,20 @@ With this in place, tapping a tile navigates to the viewer with a smooth shared 
 
 This setup works perfectly for standard navigation. However, the predictive back gesture introduces a visual clash.
 
-By default, Navigation 3 uses a **seekable** transition for predictive back. As you swipe from the edge of the screen, the `predictivePopTransitionSpec` tracks your finger progress and triggers a scale-and-translate animation that progressively shrinks the current screen.
+To understand why, it helps to know how shared elements are rendered during a transition. When a match is found (two composables with the same key on different screens), the framework removes the element from both screens and renders a single copy in a **transparent overlay** that sits above the `AnimatedContent`. This overlay copy animates its bounds from the source position to the target position (or vice versa on back). Where the element normally sits on each screen, an invisible **placeholder** reserves the space so surrounding layout doesn't collapse.
+
+Everything that is _not_ a shared element stays inside the `AnimatedContent` and is subject to the **`ContentTransform`**. This is the animation that `NavDisplay` applies to each screen during a transition. For predictive back, the default `ContentTransform` is a seekable scale-and-translate that progressively shrinks the exiting screen as you swipe from the edge.
 
 ![broken_predictive_back.gif](/assets/img/broken_predictive_back.gif){: w="320" h="4" }
 
-The conflict happens because both animations are running at the same time. The entire screen is shrinking away while the image is simultaneously morphing back to its original spot in the list. The shared element is doing exactly what it should, but the parent's scale transform running alongside it makes the result look noisy and unpolished.
+So during predictive back, the user sees both layers at once: the shared element morphing cleanly in the overlay, and the rest of the exiting screen (background, buttons, progress bars) visibly shrinking underneath it via the `ContentTransform`. The shared element is doing exactly what it should, but the parent's scale transform running alongside it makes the result look noisy and unpolished.
 
-### Why Does Programmatic Back Work?
-
-Programmatic back (`navigator.goBack()`) triggers a standard pop transition that doesn't apply any scale or translation transform to the parent container. The `AnimatedContent` inside `NavDisplay` runs its normal enter/exit animation, and the shared element coordinates with that `AnimatedVisibilityScope` cleanly. The predictive back gesture uses a different code path: the default `predictivePopTransitionSpec` applies a scale-and-translate transform to the entire screen, and that parent-level motion is what clashes with the shared element's own animation.
+> Programmatic back (`navigator.goBack()`) doesn't have this issue because it triggers a standard pop transition without any scale or translation transform on the parent.
+{: .prompt-info }
 
 ## The Solution
 
-To fix this, we need to simplify the parent container's animation during the gesture. We can override `NavDisplay.PredictivePopTransitionKey` in the route metadata, replacing the default seekable scale transition with a simple fade:
+Since the visual conflict comes from the default `ContentTransform` scaling the non-shared content, the fix is to replace it with something that doesn't compete with the morph. We override `NavDisplay.PredictivePopTransitionKey` in the route metadata, swapping the scale for a simple fade:
 
 ```kotlin
 entry<FullscreenViewerRoute>(
@@ -144,7 +145,7 @@ entry<FullscreenViewerRoute>(
 }
 ```
 
-With this change, the parent screen fades out gracefully during the predictive back gesture. This removes the competing motion and allows the shared element transition to be the sole visual focus as the user seeks back to the list.
+With a fade, the non-shared content simply becomes transparent as the gesture progresses. No scale, no translation. The shared element in the overlay is the only visible motion, producing a clean result.
 
 ![fixed_predictive_back.gif](/assets/img/fixed_predictive_back.gif){: w="320" h="4" }
 
