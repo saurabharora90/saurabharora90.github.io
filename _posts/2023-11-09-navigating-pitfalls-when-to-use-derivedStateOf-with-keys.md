@@ -82,6 +82,8 @@ With either of this approach, the bug is resolved, and the `derivedStateOf` func
 
 So, the next time you're dealing with dynamic UI components and want to optimize recompositions, consider incorporating `derivedStateOf` into your Jetpack Compose arsenal. Happy composing!
 
+{% include topmate-cta.html %}
+
 ------------------------------------------------------------------------------------------------------------------------
 
 <sup>Big thanks to [Ben Trengrove](https://twitter.com/bentrengrove?lang=en) for the review</sup>

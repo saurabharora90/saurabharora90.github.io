@@ -354,4 +354,6 @@ For UI elements where the VM should outlive the composable, hoist a `rememberVie
 
 The two examples in this post (a `LazyColumn` feed and a tabbed pager) demonstrate each shape, but the same techniques apply to dialogs, bottom sheets, or any UI section that needs its own VM lifetime.
 
+{% include topmate-cta.html service="consult" %}
+
 <sup>Thanks to Marcello Galhardo for the review. Read his explanation about the API's over at [Scoping ViewModels in Compose](https://marcellogalhardo.dev/posts/scoping-viewmodels-in-compose/)</sup>

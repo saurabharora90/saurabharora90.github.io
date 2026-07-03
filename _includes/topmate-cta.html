@@ -1,0 +1,20 @@
+{% comment %}
+  Reusable "work with me" call-to-action for the end of posts.
+  Usage: {% include topmate-cta.html %}
+         {% include topmate-cta.html service="pairing" %}   (optional, tailors the line)
+  Edit the URL once here and it updates everywhere.
+{% endcomment %}
+{% assign topmate = "https://topmate.io/saurabharora" %}
+
+{% if include.service == "agentic" %}
+  {% assign line = "If you want to get AI agents writing mobile code you'd actually merge, I do 1:1 sessions on exactly this." %}
+{% elsif include.service == "pairing" %}
+  {% assign line = "If you'd rather work through this on your own codebase, I pair 1:1 and we ship it together." %}
+{% elsif include.service == "consult" %}
+  {% assign line = "If you're making architecture calls you'll live with for years, I do 1:1 consults on Compose and KMP." %}
+{% else %}
+  {% assign line = "If this was useful and you want to go deeper on a real problem, I do 1:1 sessions on Compose, KMP, and working with AI agents." %}
+{% endif %}
+
+> {{ line }} [Book a session &rarr;]({{ topmate }})
+{: .prompt-tip }
